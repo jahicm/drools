@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleflow-group>
+    <header>
+        <globals>
+            <global identifier="out" type="org.drools.core.spi.KnowledgeHelper" />
+        </globals>
+    </header>
+    <rule>
+        <name>Student High Score Discount</name>
+        <ruleflow-group>high</ruleflow-group>
+    </rule>
+    <rule>
+        <name>Student Medium Score Discount</name>
+        <ruleflow-group>medium</ruleflow-group>
+    </rule>
+     <rule>
+        <name>Student Low Score Discount</name>
+        <ruleflow-group>low</ruleflow-group>
+    </rule>
+</ruleflow-group>

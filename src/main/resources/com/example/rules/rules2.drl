@@ -1,0 +1,35 @@
+import org.drools.demo.student.Student;
+
+no-loop
+rule "Process Student Medium Rule 1"
+    ruleflow-group "medium"
+when
+    $student: Student(score >= 100)
+then
+    System.out.println("Applying  Process Student Rule1 Medium");
+   
+    modify($student)
+    {
+    	setDiscountBonus(20);
+    }
+    int newScore = $student.getDiscountBonus() + 10; 
+    modify($student)
+    {
+    	
+    	setScore(110);
+    }
+end
+
+rule "Process Student Medium Rule 2"
+    ruleflow-group "medium"
+when
+    $student: Student(score == 110)
+then
+    System.out.println("Applying  Process Student Rule2 Medium");
+    
+    modify($student)
+    {
+    	setDiscountBonus(20);
+    }
+   
+end
