@@ -2,35 +2,28 @@ package org.drools.demo.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
+import java.util.Vector;
 
 import org.drools.demo.student.DataCollection;
 import org.drools.demo.student.Student;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.ObjectFilter;
-import org.kie.api.runtime.rule.Agenda;
-import org.kie.api.runtime.rule.AgendaFilter;
 import org.kie.api.runtime.rule.FactHandle;
-import org.kie.api.runtime.rule.RuleFlowGroup;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DroolsService {
 
-	private Student student;
 	private KieContainer kieContainer;
 	private KieSession kieSession;
-	private FactHandle factHandle;
-	private DataCollection dataCollection;
-
+	
 	public DroolsService(KieContainer kieContainer, DataCollection dataCollection) {
 		System.out.println("kieContainer :" + kieContainer);
 		this.kieContainer = kieContainer;
-		this.dataCollection = dataCollection;
 	}
 
 	public void createSession() {
@@ -65,13 +58,32 @@ public class DroolsService {
 
 		return new ArrayList<>(filteredFacts);
 	}
-
+	public List<Student> getHighScoreStudents() {
+	
+		QueryResults results = kieSession.getQueryResults("StudentsWithHighScore");
+		List<Student> studentList = new Vector<>();
+		for ( QueryResultsRow row : results ) {
+		    Student student = ( Student ) row.get("$student");
+		    studentList.add(student);
+		}
+		return studentList;
+	}
+	public List<Student> getLowScoreStudents() {
+		
+		QueryResults results = kieSession.getQueryResults("StudentsWithLowScore");
+		List<Student> studentList = new Vector<>();
+		for ( QueryResultsRow row : results ) {
+		    Student student = ( Student ) row.get("$student");
+		    studentList.add(student);
+		}
+		return studentList;
+	}
 	public void dispose() {
 		kieSession.dispose();
 	}
 
 	public void setStudent(Student student) {
 
-		factHandle = kieSession.insert(student);
+		kieSession.insert(student);
 	}
 }

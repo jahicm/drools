@@ -21,6 +21,7 @@ public class DroolsConfig {
         kieFileSystem.write(ResourceFactory.newClassPathResource("com/example/rules/rules1.drl"));
         kieFileSystem.write(ResourceFactory.newClassPathResource("com/example/rules/rules2.drl"));
         kieFileSystem.write(ResourceFactory.newClassPathResource("com/example/rules/rules3.drl"));
+        kieFileSystem.write(ResourceFactory.newClassPathResource("com/example/rules/rules4.drl"));
         kieFileSystem.write(ResourceFactory.newClassPathResource("com/example/rules/student-rule-flow.xml"));
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem).buildAll();
         return kieServices.newKieContainer(kieBuilder.getKieModule().getReleaseId());

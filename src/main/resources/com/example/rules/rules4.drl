@@ -1,0 +1,7 @@
+
+query "StudentsWithHighScore"
+    $student : Student(score>70)
+end
+query "StudentsWithLowScore"
+    $student : Student(score<70)
+end

@@ -47,6 +47,18 @@ GenericApplicationContext ctx = new AnnotationConfigApplicationContext(DroolsCon
 		List<Student> students = droolsService.getStudent();
 		students.forEach(student->System.out.println("Name:"+student.getName()+"  Surname:"+student.getSurname()+"   Score:"+student.getScore()
 		+"   Score:"+student.getDiscountBonus()));
+		
+		System.out.println("*****Query High Score Students*****");
+		List<Student> highScoreStudents = droolsService.getHighScoreStudents();
+		
+		highScoreStudents.forEach(student->System.out.println("Name:"+student.getName()+"  Surname:"+student.getSurname()+"   Score:"+student.getScore()
+		+"   Score:"+student.getDiscountBonus()));
+		System.out.println("*****Query Low Score Students*****");
+		List<Student> lowScoreStudents = droolsService.getLowScoreStudents();
+		
+		lowScoreStudents.forEach(student->System.out.println("Name:"+student.getName()+"  Surname:"+student.getSurname()+"   Score:"+student.getScore()
+		+"   Score:"+student.getDiscountBonus()));
+		
 		droolsService.dispose();
 		SpringApplication.run(Main.class, args);
 	}
